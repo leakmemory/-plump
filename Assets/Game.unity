@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformPrefab: {fileID: 1059568756}
+  player: {fileID: 1194548662}
 --- !u!4 &183912728
 Transform:
   m_ObjectHideFlags: 0
