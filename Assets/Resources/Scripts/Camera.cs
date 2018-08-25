@@ -5,7 +5,7 @@ using UnityEngine;
 public class Camera : MonoBehaviour {
 
 	[SerializeField]
-	private Transform target;
+	private Transform target; // игрок
 	
 	// Update is called once per frame
 	void Update () {

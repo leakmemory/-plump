@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
 
 	Rigidbody2D rb;
 	private float speed = 10f;
-	private float movement = 0f;
+	private float movement = 0f; // расстояние, на которое перемещается игрок
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		movement = Input.GetAxis("Horizontal") * speed;
+		// отзеркаливание игрока
 		if (Input.GetButton("Horizontal")) {
 			if (movement < 0f)
 				gameObject.transform.localScale = new Vector3(-1, 1, 1);
