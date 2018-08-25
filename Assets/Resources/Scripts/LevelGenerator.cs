@@ -7,6 +7,8 @@ public class LevelGenerator : MonoBehaviour {
 	[SerializeField]
 	private GameObject platformPrefab;
 	[SerializeField]
+	private GameObject movingPlatformPrefab;
+	[SerializeField]
 	private Transform player;
 
 	private float width = 5f;
@@ -41,7 +43,11 @@ public class LevelGenerator : MonoBehaviour {
 		if (platformPosition.Count != 0) {
 			foreach (Vector3 position in platformPosition) {
 				if (position.y < player.transform.position.y + 5f) {
-					platforms.Add(Instantiate(platformPrefab, position, Quaternion.identity));
+					GameObject platform = platformPrefab;
+					if (Random.Range(0, 9) == 5) {
+						platform = movingPlatformPrefab;
+					}
+					platforms.Add(Instantiate(platform, position, Quaternion.identity));
 					platformPosition.Remove(position);
 					break;
 				}
