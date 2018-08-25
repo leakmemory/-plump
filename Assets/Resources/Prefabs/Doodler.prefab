@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61609308834887954}
   - component: {fileID: 114160355457085380}
   m_Layer: 0
-  m_Name: Doodler 1
+  m_Name: Doodler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
