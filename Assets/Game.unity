@@ -143,6 +143,8 @@ MonoBehaviour:
   platformPrefab: {fileID: 311925815}
   movingPlatformPrefab: {fileID: 1205985219259934, guid: cde2b9451dfa5e24f8fa7724e0006b99,
     type: 2}
+  disappearingPlatform: {fileID: 1254544309644078, guid: 723b1f2832349cb4b97483a4b5fefb2c,
+    type: 2}
   player: {fileID: 1194548662}
 --- !u!4 &183912728
 Transform:
@@ -561,6 +563,12 @@ Prefab:
       propertyPath: m_Name
       value: Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 212060221725162550, guid: f4b27771ead78824a81f9d27162f5fda,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e5d3d92d10bd99a46bc9051afdaf4f65,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f4b27771ead78824a81f9d27162f5fda, type: 2}
   m_IsPrefabParent: 0

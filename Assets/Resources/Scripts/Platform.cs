@@ -6,7 +6,7 @@ public class Platform : MonoBehaviour {
 
 	private float jumpForce = 10f;
 
-	private void OnCollisionEnter2D(Collision2D collision) {
+	virtual public void OnCollisionEnter2D(Collision2D collision) {
 
 		if (collision.relativeVelocity.y <= 0) {
 

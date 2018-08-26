@@ -9,6 +9,8 @@ public class LevelGenerator : MonoBehaviour {
 	[SerializeField]
 	private GameObject movingPlatformPrefab;
 	[SerializeField]
+	private GameObject disappearingPlatform;
+	[SerializeField]
 	private Transform player;
 
 	private float width = 5f; // ширина появления платформ
@@ -49,6 +51,10 @@ public class LevelGenerator : MonoBehaviour {
 					// иногда появляются двигающиеся платформы
 					if (Random.Range(0, 9) == 5) {
 						platform = movingPlatformPrefab;
+					}
+					// и исчезающие
+					else if (Random.Range(0, 9) == 1) {
+						platform = disappearingPlatform;
 					}
 					platforms.Add(Instantiate(platform, position, Quaternion.identity));
 					platformPosition.Remove(position);
