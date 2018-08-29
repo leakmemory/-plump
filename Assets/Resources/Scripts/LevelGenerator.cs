@@ -11,11 +11,14 @@ public class LevelGenerator : MonoBehaviour {
 	[SerializeField]
 	private GameObject disappearingPlatform;
 	[SerializeField]
+	private GameObject cookiePrefab;
+	[SerializeField]
 	private Transform player;
 
 	private float width = 5f; // ширина появления платформ
 	private float minY = .5f, maxY = 1.5f; // расстояния до следующей платформы
 	private int numberOfPlatforms = 200;
+	private int numberOfCookie = 100;
 	private List<Vector3> platformPosition = new List<Vector3>(); // храним позиции платформ в отдельном списке
 	private List<GameObject> platforms = new List<GameObject>();
 
@@ -55,6 +58,15 @@ public class LevelGenerator : MonoBehaviour {
 					// и исчезающие
 					else if (Random.Range(0, 9) == 1) {
 						platform = disappearingPlatform;
+					}
+					if (Random.Range(0, 9) == 2 && platform != movingPlatformPrefab && numberOfCookie != 0) {
+						Vector3 cookiePosition = position;
+						GameObject cookie = Instantiate(cookiePrefab, position, Quaternion.identity);
+
+						cookiePosition.y += platform.GetComponent<SpriteRenderer>().sprite.bounds.size.y / 2 +
+							cookie.GetComponent<SpriteRenderer>().sprite.bounds.size.y / 2;
+						cookie.transform.position = cookiePosition;
+						numberOfCookie--;
 					}
 					platforms.Add(Instantiate(platform, position, Quaternion.identity));
 					platformPosition.Remove(position);
