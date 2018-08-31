@@ -5,6 +5,7 @@ using UnityEngine;
 public class Platform : MonoBehaviour {
 
 	private float jumpForce = 10f;
+	public float JumpForce { set { jumpForce = value; } }
 
 	virtual public void OnCollisionEnter2D(Collision2D collision) {
 
@@ -17,5 +18,9 @@ public class Platform : MonoBehaviour {
 				rb.velocity = velocity;
 			}
 		}
+	}
+
+	public void SetColor(Color color) {
+		GetComponent<SpriteRenderer>().color = color;
 	}
 }

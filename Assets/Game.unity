@@ -140,11 +140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e90116e041ad3442a37b6eff55d6b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformPrefab: {fileID: 1579794036710154, guid: 47499f1b91a44784382cc24be997bf65,
+  platformPrefab: {fileID: 114199146273132992, guid: 47499f1b91a44784382cc24be997bf65,
     type: 2}
-  movingPlatformPrefab: {fileID: 1205985219259934, guid: cde2b9451dfa5e24f8fa7724e0006b99,
+  movingPlatformPrefab: {fileID: 114558728648699364, guid: cde2b9451dfa5e24f8fa7724e0006b99,
     type: 2}
-  disappearingPlatform: {fileID: 1254544309644078, guid: 723b1f2832349cb4b97483a4b5fefb2c,
+  disappearingPlatform: {fileID: 114353682460206998, guid: 723b1f2832349cb4b97483a4b5fefb2c,
     type: 2}
   cookiePrefab: {fileID: 1988488830386194, guid: acf1252fda5c9744fbf1f9b15631207c,
     type: 2}
@@ -213,7 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb22b1a5dcedecd4dbade4a3cac2f426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cookiePrefab: {fileID: 0}
 --- !u!68 &311925818
 EdgeCollider2D:
   m_ObjectHideFlags: 0

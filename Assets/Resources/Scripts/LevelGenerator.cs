@@ -5,11 +5,11 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour {
 
 	[SerializeField]
-	private GameObject platformPrefab;
+	private Platform platformPrefab;
 	[SerializeField]
-	private GameObject movingPlatformPrefab;
+	private Platform movingPlatformPrefab;
 	[SerializeField]
-	private GameObject disappearingPlatform;
+	private Platform disappearingPlatform;
 	[SerializeField]
 	private GameObject cookiePrefab;
 	[SerializeField]
@@ -20,7 +20,7 @@ public class LevelGenerator : MonoBehaviour {
 	private int numberOfPlatforms = 200;
 	private int numberOfCookie = 100;
 	private List<Vector3> platformPosition = new List<Vector3>(); // храним позиции платформ в отдельном списке
-	private List<GameObject> platforms = new List<GameObject>();
+	private List<Platform> platforms = new List<Platform>();
 
 	// Use this for initialization
 	void Start () {
@@ -38,10 +38,10 @@ public class LevelGenerator : MonoBehaviour {
 	void Update () {
 		// удаляем платформы, которые ниже камеры
 		if (platforms.Count != 0) {
-			foreach (GameObject platform in platforms) {
+			foreach (Platform platform in platforms) {
 				if (platform.transform.position.y < player.position.y - 5f) {
 					platforms.Remove(platform);
-					Destroy(platform);
+					Destroy(platform.gameObject);
 					break;
 				}
 			}
@@ -50,13 +50,14 @@ public class LevelGenerator : MonoBehaviour {
 		if (platformPosition.Count != 0) {
 			foreach (Vector3 position in platformPosition) {
 				if (position.y < player.transform.position.y + 5f) {
-					GameObject platform = platformPrefab;
+					Platform platform = platformPrefab;
+					int random = Random.Range(0, 9);
 					// иногда появляются двигающиеся платформы
-					if (Random.Range(0, 9) == 5) {
+					if (random == 5) {
 						platform = movingPlatformPrefab;
 					}
 					// и исчезающие
-					else if (Random.Range(0, 9) == 1) {
+					else if (random == 1) {
 						platform = disappearingPlatform;
 					}
 					if (Random.Range(0, 9) == 2 && platform != movingPlatformPrefab && numberOfCookie != 0) {
@@ -69,6 +70,10 @@ public class LevelGenerator : MonoBehaviour {
 						numberOfCookie--;
 					}
 					platforms.Add(Instantiate(platform, position, Quaternion.identity));
+					if (random == 0) {
+						platforms[platforms.Count - 1].JumpForce = 50f;
+						platforms[platforms.Count - 1].SetColor(Color.red);
+					}
 					platformPosition.Remove(position);
 					break;
 				}
