@@ -39,7 +39,7 @@ public class LevelGenerator : MonoBehaviour {
 		// удаляем платформы, которые ниже камеры
 		if (platforms.Count != 0) {
 			foreach (Platform platform in platforms) {
-				if (platform.transform.position.y < player.position.y - 5f) {
+				if (platform.transform.position.y < player.position.y - 7f) {
 					platforms.Remove(platform);
 					Destroy(platform.gameObject);
 					break;
@@ -49,7 +49,7 @@ public class LevelGenerator : MonoBehaviour {
 		// добавляем платформы, положения которых приближаются к игроку
 		if (platformPosition.Count != 0) {
 			foreach (Vector3 position in platformPosition) {
-				if (position.y < player.transform.position.y + 5f) {
+				if (position.y < player.transform.position.y + 7f) {
 					Platform platform = platformPrefab;
 					int random = Random.Range(0, 9);
 					// иногда появляются двигающиеся платформы
