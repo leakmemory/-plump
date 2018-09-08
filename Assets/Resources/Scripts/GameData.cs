@@ -27,8 +27,7 @@ public class GameData : MonoBehaviour {
 	private void LoadData() {
 		if (!File.Exists(savePath)) {
 			Debug.Log("Couldn't find GameData.xml. Create new!");
-			gameData = new XDocument();
-			File.WriteAllText(savePath, gameData.ToString());
+			SaveData();
 		}
 		else {
 			gameData = XDocument.Parse(File.ReadAllText(savePath));
