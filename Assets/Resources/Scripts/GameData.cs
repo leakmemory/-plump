@@ -10,10 +10,10 @@ public class GameData : MonoBehaviour {
 	private int playedGame;
 	private int totalJumps;
 	private string savePath;
-	private XDocument gameData;
+	private XElement root;
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		savePath = Application.persistentDataPath + "/GameData.xml";
 
 		totalCookies = 0;
@@ -28,10 +28,9 @@ public class GameData : MonoBehaviour {
 		if (!File.Exists(savePath)) {
 			Debug.Log("Couldn't find GameData.xml. Create new!");
 			SaveData();
-		}
-		else {
-			gameData = XDocument.Parse(File.ReadAllText(savePath));
-			XElement root = gameData.Element("root");
+		} else {
+			XDocument gameData = XDocument.Parse(File.ReadAllText(savePath));
+			root = gameData.Element("root");
 
 			totalCookies = int.Parse(root.Element("totalCookies").Value);
 			playedGame = int.Parse(root.Element("playedGame").Value);
@@ -46,9 +45,13 @@ public class GameData : MonoBehaviour {
 		root.Add(new XElement("playedGame", playedGame));
 		root.Add(new XElement("totalJumps", totalJumps));
 
-		gameData = new XDocument(root);
+		XDocument gameData = new XDocument(root);
 		File.WriteAllText(savePath, gameData.ToString());
 		Debug.Log("Save game!");
+	}
+
+	public string GetValue(string name) {
+		return root.Element(name).Value;
 	}
 
 	public void PlayedGames() {

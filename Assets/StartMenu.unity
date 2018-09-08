@@ -543,7 +543,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Total games played:'
+  m_Text: 'Total games played: '
 --- !u!222 &243566088
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -617,7 +617,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Total cookies:'
+  m_Text: 'Total cookies: '
 --- !u!222 &252595834
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1219,6 +1219,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 968742045}
+  - component: {fileID: 968742046}
   m_Layer: 5
   m_Name: StatMenu
   m_TagString: Untagged
@@ -1248,6 +1249,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 191.85, y: 191.85}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &968742046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 968742044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cbc415fa93213f46917f118fe34a100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameData: {fileID: 1896010441}
+  totalCookies: {fileID: 252595833}
+  playedGame: {fileID: 243566087}
+  totalJumps: {fileID: 1529520630}
 --- !u!1 &1408820079
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,7 +1316,6 @@ MonoBehaviour:
   playBtn: {fileID: 472168320}
   statBtn: {fileID: 10368764}
   optionsBtn: {fileID: 540247753}
-  gameData: {fileID: 1896010441}
 --- !u!1 &1529520628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,7 +1383,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Total jumps:'
+  m_Text: 'Total jumps: '
 --- !u!222 &1529520631
 CanvasRenderer:
   m_ObjectHideFlags: 0
