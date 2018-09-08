@@ -11,6 +11,8 @@ public class MainMenu : MonoBehaviour {
 	[SerializeField]
 	private GameObject playBtn;
 	[SerializeField]
+	private GameObject statBtn;
+	[SerializeField]
 	private GameObject optionsBtn;
 
 	private SpriteRenderer darkScreenSprite;
@@ -18,6 +20,8 @@ public class MainMenu : MonoBehaviour {
 	private Text playTxt; // и текст кнопки
 	private Image optionsImg;
 	private Text optionsTxt;
+	private Image statImg;
+	private Text statTxt;
 	private float deltaDisappear = 0f;
 	private float deltaDark = 2f;
 
@@ -28,6 +32,8 @@ public class MainMenu : MonoBehaviour {
 		playTxt = playImg.GetComponentInChildren<Text>();
 		optionsImg = optionsBtn.GetComponent<Image>();
 		optionsTxt = optionsImg.GetComponentInChildren<Text>();
+		statImg = statBtn.GetComponent<Image>();
+		statTxt = statImg.GetComponentInChildren<Text>();
 	}
 
 	public void StartGame() {
@@ -47,12 +53,14 @@ public class MainMenu : MonoBehaviour {
 			color.a += 2 * deltaDark * Time.deltaTime;
 			playImg.color = color;
 			optionsImg.color = color;
+			statImg.color = color;
 
 			// исчезновение текста кнопки
 			color = playTxt.color;
 			color.a += 2 * deltaDark * Time.deltaTime;
 			playTxt.color = color;
 			optionsTxt.color = color;
+			statTxt.color = color;
 		}
 
 		if (deltaDisappear > 0) {
@@ -70,12 +78,14 @@ public class MainMenu : MonoBehaviour {
 			color.a -= 3 * deltaDisappear * Time.deltaTime;
 			playImg.color = color;
 			optionsImg.color = color;
+			statImg.color = color;
 
 			// исчезновение текста кнопки
 			color = playTxt.color;
 			color.a -= 3 * deltaDisappear * Time.deltaTime;
 			playTxt.color = color;
 			optionsTxt.color = color;
+			statTxt.color = color;
 		}
 	}
 }
