@@ -60,9 +60,12 @@ public class LoseMenu : MonoBehaviour {
 			color = playAgainImg.color;
 			color.a -= 2 * deltaDisappear * Time.deltaTime;
 			playAgainImg.color = color;
-			playAgainTxt.color = color;
-
 			backImg.color = color;
+
+			// исчезновение текста кнопки
+			color = playAgainTxt.color;
+			color.a -= 2 * deltaDisappear * Time.deltaTime;
+			playAgainTxt.color = color;
 			backTxt.color = color;
 
 		}

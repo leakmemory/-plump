@@ -41,6 +41,18 @@ public class MainMenu : MonoBehaviour {
 			Color color = darkScreenSprite.color;
 			color.a -= deltaDark * Time.deltaTime;
 			darkScreenSprite.color = color;
+
+			// исчезновение кнопки
+			color = playImg.color;
+			color.a += 2 * deltaDark * Time.deltaTime;
+			playImg.color = color;
+			optionsImg.color = color;
+
+			// исчезновение текста кнопки
+			color = playTxt.color;
+			color.a += 2 * deltaDark * Time.deltaTime;
+			playTxt.color = color;
+			optionsTxt.color = color;
 		}
 
 		if (deltaDisappear > 0) {
@@ -55,10 +67,14 @@ public class MainMenu : MonoBehaviour {
 
 			// исчезновение кнопки
 			color = playImg.color;
-			color.a -= 2 * deltaDisappear * Time.deltaTime;
+			color.a -= 3 * deltaDisappear * Time.deltaTime;
 			playImg.color = color;
-			playTxt.color = color;
 			optionsImg.color = color;
+
+			// исчезновение текста кнопки
+			color = playTxt.color;
+			color.a -= 3 * deltaDisappear * Time.deltaTime;
+			playTxt.color = color;
 			optionsTxt.color = color;
 		}
 	}
