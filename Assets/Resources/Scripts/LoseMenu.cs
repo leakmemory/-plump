@@ -13,6 +13,8 @@ public class LoseMenu : MonoBehaviour {
 	[SerializeField]
 	private GameObject backBtn;
 
+	private GameData gameData;
+
 	private SpriteRenderer darkScreenSprite;
 	private Image playAgainImg; // картинка
 	private Text playAgainTxt; // и текст кнопки
@@ -28,6 +30,8 @@ public class LoseMenu : MonoBehaviour {
 		playAgainTxt = playAgainImg.GetComponentInChildren<Text>();
 		backImg = backBtn.GetComponent<Image>();
 		backTxt = backImg.GetComponentInChildren<Text>();
+
+		gameData = GameObject.Find("GameData").GetComponent<GameData>();
 	}
 
 	public void StartNewGame() {
@@ -38,6 +42,7 @@ public class LoseMenu : MonoBehaviour {
 	public void BackToMenu() {
 		deltaDisappear = 2f;
 		backToMenu = true;
+		Destroy(gameData.gameObject); // удаляем, т. к. в стартовом меню есть своя GameData
 	}
 
 	void Update() {

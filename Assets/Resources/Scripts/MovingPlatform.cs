@@ -9,7 +9,6 @@ public class MovingPlatform : Platform {
 	private float speed;
 	private bool rightDirection = true;
 
-
 	// Use this for initialization
 	void Start () {
 		startPosition = transform.position.x;

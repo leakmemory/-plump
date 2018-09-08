@@ -10,13 +10,19 @@ public class Camera : MonoBehaviour {
 	private GameObject loseWidget;
 	[SerializeField]
 	private GameObject darkScreen;
+	private GameData gameData;
 
 	private float deltaDark = 2f;
 
 	private SpriteRenderer darkScreenSprite;
 
+	private bool saved = false; // чтобы сохранение постоянно не шло при проигрыше
+
 	void Start() {
 		darkScreenSprite = darkScreen.GetComponent<SpriteRenderer>();
+		gameData = GameObject.Find("GameData").GetComponent<GameData>();
+		gameData.PlayedGames();
+		gameData.SaveData(); // сохраняем игру при старте
 	}
 
 	private bool lose = false; 
@@ -38,6 +44,10 @@ public class Camera : MonoBehaviour {
 				transform.position = new Vector3(transform.position.x, target.position.y, transform.position.z);
 			} else if (target.position.y < transform.position.y - 7f) {
 				lose = true;
+				if (!saved) {
+					gameData.SaveData(); // сохраняем игру при проигрыше
+					saved = true;
+				}
 			}
 		}
 

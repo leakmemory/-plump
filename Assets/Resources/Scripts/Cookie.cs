@@ -5,13 +5,16 @@ using UnityEngine;
 public class Cookie : MonoBehaviour {
 
 	private Transform camera;
+	private GameData gameData;
 
 	// Use this for initialization
 	void Start () {
 		camera = GameObject.Find("Main Camera").transform;
+		gameData = GameObject.Find("GameData").GetComponent<GameData>();
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision) {
+		gameData.TotalCookies();
 		Destroy(gameObject);
 	}
 
