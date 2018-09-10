@@ -12,41 +12,45 @@ public class LoseMenu : MonoBehaviour {
 	private GameObject playAgainBtn;
 	[SerializeField]
 	private GameObject backBtn;
-
+	[SerializeField]
+	private GameObject scoreBar;
+	[SerializeField]
+	private UISpriteController UISpriteController;
+	private List<GameObject> editingUI = new List<GameObject>();
 	private GameData gameData;
 
 	private SpriteRenderer darkScreenSprite;
-	private Image playAgainImg; // картинка
-	private Text playAgainTxt; // и текст кнопки
-	private Image backImg;
-	private Text backTxt;
 	private float deltaDisappear = 0f;
 	private bool startNewGame = false; // флаги, что нажата одна
 	private bool backToMenu = false; // из двух кнопок
 
 	void Start() {
-		darkScreenSprite = darkScreen.GetComponent<SpriteRenderer>();
-		playAgainImg = playAgainBtn.GetComponent<Image>();
-		playAgainTxt = playAgainImg.GetComponentInChildren<Text>();
-		backImg = backBtn.GetComponent<Image>();
-		backTxt = backImg.GetComponentInChildren<Text>();
-
 		gameData = GameObject.Find("GameData").GetComponent<GameData>();
+		darkScreenSprite = darkScreen.GetComponent<SpriteRenderer>();
+
+		//объекты, которые должны исчезнуть/появиться
+		editingUI.Add(playAgainBtn);
+		editingUI.Add(backBtn);
+		editingUI.Add(scoreBar);
+
+		UISpriteController.AddList(editingUI);
 	}
 
 	public void StartNewGame() {
 		deltaDisappear = 2f;
 		startNewGame = true;
+		UISpriteController.Disappear(2f);
 	}
 
 	public void BackToMenu() {
 		deltaDisappear = 2f;
 		backToMenu = true;
+		UISpriteController.Disappear(2f);
 		Destroy(gameData.gameObject); // удаляем, т. к. в стартовом меню есть своя GameData
 	}
 
 	void Update() {
-		if (deltaDisappear > 0) {
+		if (startNewGame || backToMenu) {
 			if (darkScreenSprite.color.a >= 1f) {
 				if (startNewGame) {
 					SceneManager.LoadScene("Game");
@@ -60,19 +64,6 @@ public class LoseMenu : MonoBehaviour {
 			Color color = darkScreenSprite.color;
 			color.a += deltaDisappear * Time.deltaTime;
 			darkScreenSprite.color = color;
-
-			// исчезновение кнопки
-			color = playAgainImg.color;
-			color.a -= 2 * deltaDisappear * Time.deltaTime;
-			playAgainImg.color = color;
-			backImg.color = color;
-
-			// исчезновение текста кнопки
-			color = playAgainTxt.color;
-			color.a -= 2 * deltaDisappear * Time.deltaTime;
-			playAgainTxt.color = color;
-			backTxt.color = color;
-
 		}
 	}
 }

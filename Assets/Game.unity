@@ -163,6 +163,8 @@ MonoBehaviour:
   darkScreen: {fileID: 1906409756}
   playAgainBtn: {fileID: 1014322869}
   backBtn: {fileID: 696725751}
+  scoreBar: {fileID: 847184168}
+  UISpriteController: {fileID: 1324587976}
 --- !u!1 &183912726
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,6 +1117,46 @@ Transform:
   m_PrefabParentObject: {fileID: 4181467451225780, guid: cf3262a2d6266d84e941308146fda721,
     type: 2}
   m_PrefabInternal: {fileID: 811753302}
+--- !u!1 &1324587974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1324587975}
+  - component: {fileID: 1324587976}
+  m_Layer: 0
+  m_Name: UISpriteController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1324587975
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1324587974}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 198.34335, y: 357.16025, z: -2.052344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1324587976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1324587974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11b2070fb627bc49a4f833e5cd5ccf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1369234227
 GameObject:
   m_ObjectHideFlags: 0

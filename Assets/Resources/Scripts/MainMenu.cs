@@ -14,30 +14,31 @@ public class MainMenu : MonoBehaviour {
 	private GameObject statBtn;
 	[SerializeField]
 	private GameObject optionsBtn;
+	[SerializeField]
+	private UISpriteController UISpriteController;
 
 	private SpriteRenderer darkScreenSprite;
-	private Image playImg; // картинка
-	private Text playTxt; // и текст кнопки
-	private Image optionsImg;
-	private Text optionsTxt;
-	private Image statImg;
-	private Text statTxt;
+	private List<GameObject> editingUI = new List<GameObject>();
+
 	private float deltaDisappear = 0f;
 	private float deltaDark = 2f;
 
 	// Use this for initialization
 	void Start () {
 		darkScreenSprite = darkScreen.GetComponent<SpriteRenderer>();
-		playImg = playBtn.GetComponent<Image>();
-		playTxt = playImg.GetComponentInChildren<Text>();
-		optionsImg = optionsBtn.GetComponent<Image>();
-		optionsTxt = optionsImg.GetComponentInChildren<Text>();
-		statImg = statBtn.GetComponent<Image>();
-		statTxt = statImg.GetComponentInChildren<Text>();
+
+		//объекты, которые должны исчезнуть/появиться
+		editingUI.Add(playBtn);
+		editingUI.Add(statBtn);
+		editingUI.Add(optionsBtn);
+
+		UISpriteController.AddList(editingUI);
+		UISpriteController.Appear(); //в стартовом меню сразу появляются объекты
 	}
 
 	public void StartGame() {
 		deltaDisappear = 2f;
+		UISpriteController.Disappear(2f);
 	}
 
 	// Update is called once per frame
@@ -47,20 +48,6 @@ public class MainMenu : MonoBehaviour {
 			Color color = darkScreenSprite.color;
 			color.a -= deltaDark * Time.deltaTime;
 			darkScreenSprite.color = color;
-
-			// исчезновение кнопки
-			color = playImg.color;
-			color.a += 2 * deltaDark * Time.deltaTime;
-			playImg.color = color;
-			optionsImg.color = color;
-			statImg.color = color;
-
-			// исчезновение текста кнопки
-			color = playTxt.color;
-			color.a += 2 * deltaDark * Time.deltaTime;
-			playTxt.color = color;
-			optionsTxt.color = color;
-			statTxt.color = color;
 		}
 
 		if (deltaDisappear > 0) {
@@ -72,20 +59,6 @@ public class MainMenu : MonoBehaviour {
 			Color color = darkScreenSprite.color;
 			color.a += deltaDisappear * Time.deltaTime;
 			darkScreenSprite.color = color;
-
-			// исчезновение кнопки
-			color = playImg.color;
-			color.a -= 3 * deltaDisappear * Time.deltaTime;
-			playImg.color = color;
-			optionsImg.color = color;
-			statImg.color = color;
-
-			// исчезновение текста кнопки
-			color = playTxt.color;
-			color.a -= 3 * deltaDisappear * Time.deltaTime;
-			playTxt.color = color;
-			optionsTxt.color = color;
-			statTxt.color = color;
 		}
 	}
 }
