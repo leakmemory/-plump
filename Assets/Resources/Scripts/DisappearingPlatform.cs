@@ -17,7 +17,7 @@ public class DisappearingPlatform : Platform {
 	public override void OnCollisionEnter2D(Collision2D collision) {
 		base.OnCollisionEnter2D(collision);
 		if (collision.relativeVelocity.y <= 0) {
-			delta = .2f;
+			delta = 4f;
 			ec.enabled = false;
 		}
 	}
@@ -25,7 +25,7 @@ public class DisappearingPlatform : Platform {
 	void Update() {
 		if (delta > 0) {
 			Color clr = sr.color;
-			clr.a -= delta;
+			clr.a -= delta * Time.deltaTime;
 			sr.color = clr;
 		}
 	}
