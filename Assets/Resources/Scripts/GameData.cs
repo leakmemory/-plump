@@ -40,7 +40,7 @@ public class GameData : MonoBehaviour {
 			root = gameData.Element("root");
 
 			foreach (KeyValuePair<string, int> val in data) {
-				data[val.Key] = int.Parse(root.Element(val.Key).Value);
+				data[val.Key] = int.Parse(GetValue(val.Key));
 			}
 
 			Debug.Log("GameData.xml loaded!");
