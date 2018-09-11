@@ -6,19 +6,26 @@ using UnityEngine;
 
 public class GameData : MonoBehaviour {
 
-	private int totalCookies;
-	private int playedGame;
-	private int totalJumps;
 	private string savePath;
 	private XElement root;
+
+	private int totalCookies;
+	private int playedGames;
+	private int totalJumps;
+
+	private SortedDictionary<string, int> data = new SortedDictionary<string, int>();
 
 	// Use this for initialization
 	void Start() {
 		savePath = Application.persistentDataPath + "/GameData.xml";
 
 		totalCookies = 0;
-		playedGame = 0;
+		playedGames = 0;
 		totalJumps = 0;
+
+		data.Add("totalCookies", totalCookies);
+		data.Add("playedGames", playedGames);
+		data.Add("totalJumps", totalJumps);
 		LoadData();
 
 		DontDestroyOnLoad(gameObject);
@@ -32,18 +39,20 @@ public class GameData : MonoBehaviour {
 			XDocument gameData = XDocument.Parse(File.ReadAllText(savePath));
 			root = gameData.Element("root");
 
-			totalCookies = int.Parse(root.Element("totalCookies").Value);
-			playedGame = int.Parse(root.Element("playedGame").Value);
-			totalJumps = int.Parse(root.Element("totalJumps").Value);
+			foreach (KeyValuePair<string, int> val in data) {
+				data[val.Key] = int.Parse(root.Element(val.Key).Value);
+			}
+
 			Debug.Log("GameData.xml loaded!");
 		}
 	}
 
 	public void SaveData() {
-		XElement root = new XElement("root");
-		root.Add(new XElement("totalCookies", totalCookies));
-		root.Add(new XElement("playedGame", playedGame));
-		root.Add(new XElement("totalJumps", totalJumps));
+		root = new XElement("root");
+
+		foreach (KeyValuePair<string, int> val in data) {
+			root.Add(new XElement(val.Key, val.Value));
+		}
 
 		XDocument gameData = new XDocument(root);
 		File.WriteAllText(savePath, gameData.ToString());
@@ -54,16 +63,12 @@ public class GameData : MonoBehaviour {
 		return root.Element(name).Value;
 	}
 
-	public void PlayedGames() {
-		playedGame++;
+	public void IncrementValue(string name, int value) {
+		data[name] += value;
 	}
 
-	public void TotalCookies() {
-		totalCookies++;
-	}
-
-	public void TotalJumps() {
-		totalJumps++;
+	public void SetValue(string name, int value) {
+		data[name] = value;
 	}
 
 	// Update is called once per frame

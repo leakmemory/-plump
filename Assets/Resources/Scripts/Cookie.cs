@@ -14,7 +14,7 @@ public class Cookie : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision) {
-		gameData.TotalCookies();
+		gameData.IncrementValue("totalCookies", 1);
 		Destroy(gameObject);
 	}
 

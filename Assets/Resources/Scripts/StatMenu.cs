@@ -17,7 +17,7 @@ public class StatMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		totalCookies.text += gameData.GetValue("totalCookies");
-		playedGame.text += gameData.GetValue("playedGame");
+		playedGame.text += gameData.GetValue("playedGames");
 		totalJumps.text += gameData.GetValue("totalJumps");
 	}
 	

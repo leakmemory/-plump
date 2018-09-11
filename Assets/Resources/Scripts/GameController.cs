@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour {
 		gameData = GameObject.Find("GameData").GetComponent<GameData>();
 		gameCamera = camera.GetComponent<Camera>();
 		player = playerObj.GetComponent<Player>();
-		gameData.PlayedGames();
+		gameData.IncrementValue("playedGames", 1);
 		gameData.SaveData(); // сохраняем игру при старте
 	}
 	

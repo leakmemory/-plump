@@ -19,7 +19,7 @@ public class Platform : MonoBehaviour {
 				Vector2 velocity = rb.velocity;
 				velocity.y = jumpForce;
 				rb.velocity = velocity;
-				gameData.TotalJumps();
+				gameData.IncrementValue("totalJumps", 1);
 			}
 		}
 	}
