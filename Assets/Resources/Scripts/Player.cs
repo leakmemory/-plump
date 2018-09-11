@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	Rigidbody2D rb;
-	private float speed = 10f;
+	private float speed = 500f;
 	private float movement = 0f; // расстояние, на которое перемещается игрок
 	private bool canMove = true;
 	public bool CanMove { set { canMove = value; } }
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
 		if (!canMove) return;
 
 		Vector2 velocity = rb.velocity;
-		velocity.x = movement;
+		velocity.x = movement * Time.fixedDeltaTime;
 		rb.velocity = velocity;
 	}
 }
