@@ -7,6 +7,8 @@ public class Player : MonoBehaviour {
 	Rigidbody2D rb;
 	private float speed = 10f;
 	private float movement = 0f; // расстояние, на которое перемещается игрок
+	private bool canMove = true;
+	public bool CanMove { set { canMove = value; } }
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +17,8 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (!canMove) return;
+
 		movement = Input.GetAxis("Horizontal") * speed;
 		// отзеркаливание игрока
 		if (Input.GetButton("Horizontal")) {
@@ -26,6 +30,8 @@ public class Player : MonoBehaviour {
 	}
 
 	private void FixedUpdate() {
+		if (!canMove) return;
+
 		Vector2 velocity = rb.velocity;
 		velocity.x = movement;
 		rb.velocity = velocity;
