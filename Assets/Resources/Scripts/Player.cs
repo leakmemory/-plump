@@ -9,10 +9,16 @@ public class Player : MonoBehaviour {
 	private float movement = 0f; // расстояние, на которое перемещается игрок
 	private bool canMove = true;
 	public bool CanMove { set { canMove = value; } }
+	private float startJumpForce = 15f;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
+
+		// начальный прыжок игрока
+		Vector2 velocity = rb.velocity;
+		velocity.y = startJumpForce;
+		rb.velocity = velocity;
 	}
 	
 	// Update is called once per frame
