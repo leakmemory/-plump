@@ -10,6 +10,7 @@ public class ScoreBar : MonoBehaviour {
 
 	private Text score;
 	private int maxScore = 0;
+	public int Score { get { return maxScore; } }
 
 	// Use this for initialization
 	void Start () {

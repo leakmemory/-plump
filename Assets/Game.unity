@@ -1394,3 +1394,4 @@ MonoBehaviour:
   camera: {fileID: 409554155}
   loseWidget: {fileID: 1477329691}
   darkScreen: {fileID: 1906409756}
+  scoreBar: {fileID: 847184172}
