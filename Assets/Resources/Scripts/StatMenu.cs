@@ -40,15 +40,52 @@ public class StatMenu : MonoBehaviour {
 		playedGame.text += gameData.GetXmlValue("playedGames");
 		totalJumps.text += gameData.GetXmlValue("totalJumps");
 		totalScore.text += gameData.GetXmlValue("totalScore");
-		totalPlayTime.text += gameData.GetXmlValue("totalPlayTime");
-		longestPlayTime.text += gameData.GetXmlValue("longestPlayTime");
+		totalPlayTime.text += TimeConvert(gameData.GetXmlValue("totalPlayTime"));
+		longestPlayTime.text += TimeConvert(gameData.GetXmlValue("longestPlayTime"));
 		maxScore.text += gameData.GetXmlValue("maxScore");
 		maxJumps.text += gameData.GetXmlValue("maxJumps");
 		maxCookies.text += gameData.GetXmlValue("maxCookies");
-		lastPlayTime.text += gameData.GetXmlValue("lastPlayTime");
+		lastPlayTime.text += TimeConvert(gameData.GetXmlValue("lastPlayTime"));
 		lastScore.text += gameData.GetXmlValue("lastScore");
 		lastJumps.text += gameData.GetXmlValue("lastJumps");
 		lastCookies.text += gameData.GetXmlValue("lastCookies");
 	}
 	
+	string TimeConvert(int time) {
+
+		string resultTime = "";
+
+		int days = 0;
+		int hours = 0;
+		int minutes = 0;
+		int seconds = 0;
+
+		days = time / 60 / 60 / 24;
+
+		if (days > 0) {
+			time -= days * 24 * 60 * 60;
+			resultTime += days + "d ";
+		}
+
+		hours = time / 60 / 60;
+
+		if (hours > 0) {
+			time -= hours * 60 * 60;
+			resultTime += hours + "h ";
+		}
+
+		minutes = time / 60;
+
+		if (minutes > 0) {
+			time -= minutes * 60;
+			resultTime += minutes + "m ";
+		}
+
+		if (time > 0) {
+			seconds = time;
+			resultTime += time + "s";
+		}
+
+		return resultTime;
+	}
 }
