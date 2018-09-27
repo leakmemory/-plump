@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour {
@@ -16,20 +17,27 @@ public class LevelGenerator : MonoBehaviour {
 	private Transform player;
 
 	private float width = 5f; // ширина появления платформ
-	private float minY = .5f, maxY = 1.5f; // расстояния до следующей платформы
-	private int numberOfPlatforms = 200;
 	private int numberOfCookie = 100;
 	private List<Vector3> platformPosition = new List<Vector3>(); // храним позиции платформ в отдельном списке
 	private List<Platform> platforms = new List<Platform>();
+	Vector3 spawnPosition = new Vector3();
 
 	// Use this for initialization
 	void Start () {
-		Vector3 spawnPosition = new Vector3();
 
-		// генерируем позиции платформ в начале уровня
-		for (int i = 0; i < numberOfPlatforms; i++) {
+	}
+
+	public void GenerateGroup(XElement group, int maxScr) {
+		int maxScore = maxScr; // максимальный счет, до которого будет создаваться группа
+		float minY = float.Parse(group.Attribute("minY").Value); // минимальное и максимальное
+		float maxY = float.Parse(group.Attribute("maxY").Value); // расстояние между платформами
+
+		while (spawnPosition.y * 10 < maxScore) {
 			spawnPosition.y += Random.Range(minY, maxY);
 			spawnPosition.x = Random.Range(-width, width);
+
+			if (spawnPosition.y > maxScore) spawnPosition.y = maxScore;
+
 			platformPosition.Add(spawnPosition);
 		}
 	}

@@ -1,0 +1,4 @@
+<root>
+	<platformsGroup maxScore = "500" minY = "0.5" maxY = "1.5">easy</platformsGroup>
+	<platformsGroup maxScore = "1000" minY = "1" maxY = "1.5">easy</platformsGroup>
+</root>

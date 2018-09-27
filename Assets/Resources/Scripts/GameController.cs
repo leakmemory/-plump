@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
@@ -14,7 +16,13 @@ public class GameController : MonoBehaviour {
 	private GameObject darkScreen;
 	[SerializeField]
 	private ScoreBar scoreBar;
+	[SerializeField]
+	private LevelGenerator levelGenerator;
 	private GameData gameData;
+
+	List<XElement> groupsOfPlatforms = new List<XElement>(); // список групп из платформ
+	private int currentGroup = 0; // группа, в которой находится игрок
+	private int scoreForGroup; // счет, при котором будет создана следующая группа в игре
 
 	private float deltaDark = 2f;
 	private bool lose = false;
@@ -28,6 +36,15 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		XDocument level = XDocument.Parse(File.ReadAllText("Assets/Resources/XML/Level.xml"));
+		XElement root = level.Element("root");
+		foreach (XElement group in root.Elements("platformsGroup")) {
+			groupsOfPlatforms.Add(group);
+		}
+
+		scoreForGroup = int.Parse(groupsOfPlatforms[currentGroup].Attribute("maxScore").Value);
+		levelGenerator.GenerateGroup(groupsOfPlatforms[currentGroup], scoreForGroup);
+
 		darkScreenSprite = darkScreen.GetComponent<SpriteRenderer>();
 		gameData = GameObject.Find("GameData").GetComponent<GameData>();
 		gameCamera = camera.GetComponent<Camera>();
@@ -52,6 +69,20 @@ public class GameController : MonoBehaviour {
 			Color color = darkScreenSprite.color;
 			color.a -= deltaDark * Time.deltaTime;
 			darkScreenSprite.color = color;
+		}
+
+		// если пора создать следующую группу
+		if (scoreBar.Score > scoreForGroup) {
+			// проверяем, а не последняя ли это группа на уровне
+			if (groupsOfPlatforms.Count - 1 == currentGroup) {
+				// если да, то вычисляем "высоту" группы, чтобы снова ее создать (пока последняя группа всегда будет повторяться)
+				scoreForGroup += int.Parse(groupsOfPlatforms[currentGroup].Attribute("maxScore").Value) - 
+					int.Parse(groupsOfPlatforms[currentGroup - 1].Attribute("maxScore").Value);
+			} else {
+				currentGroup++;
+				scoreForGroup = int.Parse(groupsOfPlatforms[currentGroup].Attribute("maxScore").Value);
+			}
+			levelGenerator.GenerateGroup(groupsOfPlatforms[currentGroup], scoreForGroup);
 		}
 
 		// если игрок упал
