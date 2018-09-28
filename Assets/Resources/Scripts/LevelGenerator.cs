@@ -27,7 +27,12 @@ public class LevelGenerator : MonoBehaviour {
 
 	}
 
+	// генерируем группу платформ
 	public void GenerateGroup(XElement group, int maxScr) {
+		if (group.Attribute("fixed").Value == "1") {
+			GenerateFixedGroup(group);
+			return;
+		}
 		int maxScore = maxScr; // максимальный счет, до которого будет создаваться группа
 		float minY = float.Parse(group.Attribute("minY").Value); // минимальное и максимальное
 		float maxY = float.Parse(group.Attribute("maxY").Value); // расстояние между платформами
@@ -38,10 +43,38 @@ public class LevelGenerator : MonoBehaviour {
 
 			if (spawnPosition.y > maxScore) spawnPosition.y = maxScore;
 
-			platformPosition.Add(spawnPosition);
+			platforms.Add(Instantiate(platformPrefab, spawnPosition, Quaternion.identity));
 		}
 	}
-	
+
+	// генерируем заранее известную группу платформ
+	public void GenerateFixedGroup(XElement group) {
+		List<XElement> platformsElem = new List<XElement>(group.Elements("platform"));
+		foreach (XElement platform in platformsElem) {
+			float x = float.Parse(platform.Attribute("x").Value);
+			float y = float.Parse(platform.Attribute("y").Value);
+			string platformType = platform.Value;
+			Platform curPlatform = null;
+
+			spawnPosition.y += y;
+			spawnPosition.x = x;
+			
+			switch(platformType) {
+				case "normal":
+					curPlatform = platformPrefab;
+					break;
+				case "moving":
+					curPlatform = movingPlatformPrefab;
+					break;
+				case "disappearing":
+					curPlatform = disappearingPlatform;
+					break;
+			}
+
+			platforms.Add(Instantiate(curPlatform, spawnPosition, Quaternion.identity));
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		// удаляем платформы, которые ниже камеры
@@ -54,38 +87,20 @@ public class LevelGenerator : MonoBehaviour {
 				}
 			}
 		}
-		// добавляем платформы, положения которых приближаются к игроку
-		if (platformPosition.Count != 0) {
-			foreach (Vector3 position in platformPosition) {
-				if (position.y < player.transform.position.y + 7f) {
-					Platform platform = platformPrefab;
-					int random = Random.Range(0, 9);
-					// иногда появляются двигающиеся платформы
-					if (random == 5) {
-						platform = movingPlatformPrefab;
-					}
-					// и исчезающие
-					else if (random == 1) {
-						platform = disappearingPlatform;
-					}
-					if (Random.Range(0, 9) == 2 && platform != movingPlatformPrefab && numberOfCookie != 0) {
-						Vector3 cookiePosition = position;
-						GameObject cookie = Instantiate(cookiePrefab, position, Quaternion.identity);
+		// еще пригодится
+		//			if (Random.Range(0, 9) == 2 && platform != movingPlatformPrefab && numberOfCookie != 0) {
+		//				Vector3 cookiePosition = position;
+		//				GameObject cookie = Instantiate(cookiePrefab, position, Quaternion.identity);
 
-						cookiePosition.y += platform.GetComponent<SpriteRenderer>().sprite.bounds.size.y / 2 +
-							cookie.GetComponent<SpriteRenderer>().sprite.bounds.size.y / 2;
-						cookie.transform.position = cookiePosition;
-						numberOfCookie--;
-					}
-					platforms.Add(Instantiate(platform, position, Quaternion.identity));
-					if (random == 0) {
-						platforms[platforms.Count - 1].JumpForce = 50f;
-						platforms[platforms.Count - 1].SetColor(Color.red);
-					}
-					platformPosition.Remove(position);
-					break;
-				}
-			}
-		}
+		//				cookiePosition.y += platform.GetComponent<SpriteRenderer>().sprite.bounds.size.y / 2 +
+		//					cookie.GetComponent<SpriteRenderer>().sprite.bounds.size.y / 2;
+		//				cookie.transform.position = cookiePosition;
+		//				numberOfCookie--;
+		//			}
+		//			platforms.Add(Instantiate(platform, position, Quaternion.identity));
+		//			if (random == 0) {
+		//				platforms[platforms.Count - 1].JumpForce = 50f;
+		//				platforms[platforms.Count - 1].SetColor(Color.red);
+		//			}
 	}
 }
