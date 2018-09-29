@@ -48,7 +48,7 @@ public class LevelGenerator : MonoBehaviour {
 	}
 
 	// генерируем заранее известную группу платформ
-	public void GenerateFixedGroup(XElement group) {
+	private void GenerateFixedGroup(XElement group) {
 		List<XElement> platformsElem = new List<XElement>(group.Elements("platform"));
 		foreach (XElement platform in platformsElem) {
 			float x = float.Parse(platform.Attribute("x").Value);
