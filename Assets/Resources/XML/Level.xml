@@ -1,17 +1,22 @@
 <root>
 	<platformsGroup maxScore = "100" fixed = "0" minY = "0.5" maxY = "1.5"/>
-	<platformsGroup maxScore = "200" fixed = "0" minY = "1" maxY = "1.5" />
-	<platformsGroup maxScore = "320" fixed = "1">
+	<platformsGroup maxScore = "220" fixed = "1">
 		<platform x = "2" y = "3">normal</platform>
 		<platform x = "-2" y = "3">normal</platform>
 		<platform x = "1" y = "3">normal</platform>
 		<platform x = "-1" y = "3">normal</platform>
 	</platformsGroup>
-		<platformsGroup maxScore = "380" fixed = "1">
+	<platformsGroup maxScore = "280" fixed = "1">
 		<platform x = "2" y = "2">moving</platform>
 		<platform x = "-2" y = "2">moving</platform>
 		<platform x = "1" y = "1">disappearing</platform>
 		<platform x = "-1" y = "1">disappearing</platform>
 	</platformsGroup>
-	<platformsGroup maxScore = "2500" fixed = "0" minY = "0.5" maxY = "1.5"/>
+	<platformsGroup maxScore = "400" fixed = "0" minY = "0.5" maxY = "1.5"/>
+	<platformsGroup maxScore = "520" fixed = "1">
+		<platform x = "2" y = "3">disappearing</platform>
+		<platform x = "-2" y = "3">disappearing</platform>
+		<platform x = "1" y = "3">normal</platform>
+		<platform x = "-1" y = "3">disappearing</platform>
+	</platformsGroup>
 </root>
