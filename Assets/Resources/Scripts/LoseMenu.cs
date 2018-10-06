@@ -15,6 +15,8 @@ public class LoseMenu : MonoBehaviour {
 	[SerializeField]
 	private GameObject scoreBar;
 	[SerializeField]
+	private GameObject cookie;
+	[SerializeField]
 	private UISpriteController UISpriteController;
 	private List<GameObject> editingUI = new List<GameObject>();
 	private GameData gameData;
@@ -32,6 +34,7 @@ public class LoseMenu : MonoBehaviour {
 		editingUI.Add(playAgainBtn);
 		editingUI.Add(backBtn);
 		editingUI.Add(scoreBar);
+		editingUI.Add(cookie);
 
 		UISpriteController.AddList(editingUI);
 	}

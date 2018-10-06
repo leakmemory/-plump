@@ -26,6 +26,8 @@ public class GameData : MonoBehaviour {
 	private int lastCookies; // последнюю
 	private int lastPlayTime; // игру
 
+	private int currentCookies; // текущее количество печенек
+
 	private SortedDictionary<string, int> data = new SortedDictionary<string, int>();
 
 	// Use this for initialization
@@ -45,6 +47,7 @@ public class GameData : MonoBehaviour {
 		lastJumps = 0;
 		lastCookies = 0;
 		lastPlayTime = 0;
+		currentCookies = 0;
 
 		data.Add("totalCookies", totalCookies);
 		data.Add("playedGames", playedGames);
@@ -59,6 +62,7 @@ public class GameData : MonoBehaviour {
 		data.Add("lastJumps", lastJumps);
 		data.Add("lastCookies", lastCookies);
 		data.Add("lastPlayTime", lastPlayTime);
+		data.Add("currentCookies", currentCookies);
 
 		LoadData();
 
